@@ -1,3 +1,4 @@
+@import "leaflet/dist/leaflet.css";
 * {
   margin: 0;
   padding: 0;
@@ -16,4 +17,81 @@ body {
 #root {
   width: 100%;
   height: 100vh;
+}
+.map-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+}
+
+.district-map {
+    width: 100%;
+    height: 100%;
+}
+
+.location-card {
+    position: absolute;
+    right: 25px;
+    bottom: 25px;
+    width: 350px;
+    background: white;
+    border-radius: 18px;
+    overflow: hidden;
+    z-index: 1000;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+}
+
+.location-image {
+    height: 160px;
+    background: #d8ddd5;
+    display: flex;
+    align-items: flex-end;
+    padding: 15px;
+}
+
+.location-image span {
+    background: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+.location-content {
+    padding: 20px;
+}
+
+.location-category {
+    font-size: 12px;
+    text-transform: uppercase;
+    opacity: 0.6;
+}
+
+.location-content h2 {
+    margin: 5px 0 10px;
+}
+
+.location-content p {
+    line-height: 1.5;
+}
+
+.close-button {
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    z-index: 2;
+    border: none;
+    background: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.explore-button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
 }
