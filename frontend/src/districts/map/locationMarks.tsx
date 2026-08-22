@@ -4,7 +4,8 @@ const locations = [
         name: "Rumtek Monastery",
         category: "monument",
         lat: 27.2886,
-        lng: 88.5614
+        lng: 88.5614,
+        description: "one of sikkims most important monastries"
     }
 ];
 

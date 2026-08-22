@@ -1,27 +1,315 @@
 @import "leaflet/dist/leaflet.css";
+/* ========================================
+   GLOBAL RESET
+   ======================================== */
+
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: #f4ead2;
+    color: #3b2a1f;
+
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: #f5f5f5;
+    overflow: hidden;
+}
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+a {
+    color: inherit;
 }
 
 #root {
-  width: 100%;
-  height: 100vh;
+    width: 100%;
+    height: 100%;
 }
-.map-container {
-    position: relative;
+
+
+/* ========================================
+   APP LAYOUT
+   ======================================== */
+
+.app {
+    display: flex;
+
     width: 100%;
     height: 100vh;
+
+    overflow: hidden;
+
+    background-color: #f4ead2;
+}
+
+.main-content {
+    flex: 1;
+
+    min-width: 0;
+    height: 100%;
+
+    overflow: auto;
+
+    background-color: #f4ead2;
+}
+
+.page {
+    min-height: 100%;
+
+    padding: 40px;
+
+    background-color: #f4ead2;
+    color: #3b2a1f;
+}
+
+
+/* ========================================
+   SIDEBAR
+   ======================================== */
+
+.sidebar {
+    width: 250px;
+    height: 100vh;
+
+    flex-shrink: 0;
+
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    padding: 24px 16px;
+
+    background-color: #f4ead2;
+
+    border-right: 1px solid #b99b6b;
+
+    transition: width 0.25s ease;
+
+    overflow: hidden;
+}
+
+.sidebar.collapsed {
+    width: 76px;
+}
+
+
+/* ========================================
+   SIDEBAR HEADER
+   ======================================== */
+
+.sidebar-header {
+    min-height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 38px;
+}
+
+.sidebar-logo {
+    margin: 0;
+    padding-left: 10px;
+
+    color: #9f452c;
+
+    font-size: 24px;
+    font-weight: 700;
+
+    letter-spacing: 0.08em;
+
+    white-space: nowrap;
+}
+
+
+/* ========================================
+   SIDEBAR TOGGLE
+   ======================================== */
+
+.sidebar-toggle {
+    width: 40px;
+    height: 40px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #b99b6b;
+    border-radius: 4px;
+
+    background-color: #f8efd9;
+
+    color: #9f452c;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.sidebar-toggle:hover {
+    background-color: #9f452c;
+    color: #f8efd9;
+
+    transform: translateY(-1px);
+}
+
+
+/* ========================================
+   SIDEBAR NAVIGATION
+   ======================================== */
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+.sidebar-link {
+    width: 100%;
+    height: 46px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 0 13px;
+
+    border: 1px solid transparent;
+    border-radius: 4px;
+
+    color: #6f5140;
+
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    white-space: nowrap;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.sidebar-link svg {
+    flex-shrink: 0;
+
+    color: #9f452c;
+
+    stroke-width: 1.8;
+}
+
+.sidebar-link:hover {
+    background-color: #f4e6c9;
+
+    color: #6e3424;
+
+    border-color: #b99b6b;
+}
+
+.sidebar-link.active {
+    background-color: #f8efd9;
+
+    color: #9f452c;
+
+    border-color: #9f452c;
+
+    font-weight: 600;
+}
+
+.sidebar-link.active svg {
+    color: #9f452c;
+}
+
+
+/* ========================================
+   COLLAPSED SIDEBAR
+   ======================================== */
+
+.sidebar.collapsed .sidebar-header {
+    justify-content: center;
+}
+
+.sidebar.collapsed .sidebar-nav {
+    align-items: center;
+}
+
+.sidebar.collapsed .sidebar-link {
+    width: 44px;
+
+    justify-content: center;
+
+    padding: 0;
+}
+
+.sidebar.collapsed .sidebar-link span {
+    display: none;
+}
+
+.sidebar.collapsed .sidebar-footer {
+    display: none;
+}
+
+
+/* ========================================
+   SIDEBAR FOOTER
+   ======================================== */
+
+.sidebar-footer {
+    padding: 10px 12px;
+}
+
+.sidebar-footer p {
+    margin: 0;
+
+    color: #7a5543;
+
+    font-size: 11px;
+
+    letter-spacing: 0.08em;
+
+    text-transform: uppercase;
+}
+
+
+/* ========================================
+   MAP CONTAINER
+   ======================================== */
+
+.map-container {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: #f4ead2;
 }
 
 .district-map {
@@ -29,31 +317,100 @@ body {
     height: 100%;
 }
 
+
+/* ========================================
+   LEAFLET
+   ======================================== */
+
+.leaflet-container {
+    width: 100%;
+    height: 100%;
+
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.leaflet-control-zoom a {
+    color: #3b2a1f !important;
+
+    background-color: #f8efd9 !important;
+
+    border-color: #b99b6b !important;
+}
+
+.leaflet-control-zoom a:hover {
+    background-color: #f4e6c9 !important;
+
+    color: #9f452c !important;
+}
+
+.leaflet-control-attribution {
+    background-color: rgba(248, 239, 217, 0.9) !important;
+
+    color: #6f5140 !important;
+}
+
+.leaflet-control-attribution a {
+    color: #9f452c !important;
+}
+
+
+/* ========================================
+   LOCATION CARD
+   ======================================== */
+
 .location-card {
     position: absolute;
+
     right: 25px;
     bottom: 25px;
+
     width: 350px;
-    background: white;
-    border-radius: 18px;
+
     overflow: hidden;
+
     z-index: 1000;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+
+    background-color: #f8efd9;
+
+    border: 1px solid #b99b6b;
+
+    border-radius: 6px;
+
+    color: #3b2a1f;
+
+    box-shadow:
+        0 8px 20px rgba(75, 49, 35, 0.14);
 }
 
 .location-image {
     height: 160px;
-    background: #d8ddd5;
+
     display: flex;
     align-items: flex-end;
+
     padding: 15px;
+
+    background-color: #eee3c8;
+
+    background-size: cover;
+    background-position: center;
 }
 
 .location-image span {
-    background: white;
     padding: 5px 10px;
+
+    background-color: rgba(248, 239, 217, 0.92);
+
+    border: 1px solid #9f452c;
     border-radius: 20px;
-    font-size: 12px;
+
+    color: #9f452c;
+
+    font-size: 10px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.06em;
 }
 
 .location-content {
@@ -61,37 +418,197 @@ body {
 }
 
 .location-category {
-    font-size: 12px;
+    margin: 0 0 5px;
+
+    color: #9f452c;
+
+    font-size: 10px;
+
     text-transform: uppercase;
-    opacity: 0.6;
+
+    letter-spacing: 0.08em;
 }
 
 .location-content h2 {
-    margin: 5px 0 10px;
+    margin: 0 0 10px;
+
+    color: #3b2a1f;
+
+    font-size: 22px;
 }
 
 .location-content p {
+    margin: 0 0 15px;
+
+    color: #6f5140;
+
     line-height: 1.5;
+
+    font-size: 13px;
 }
 
 .close-button {
     position: absolute;
-    right: 12px;
+
     top: 12px;
+    right: 12px;
+
     z-index: 2;
-    border: none;
-    background: white;
+
     width: 32px;
     height: 32px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 1px solid #9f452c;
     border-radius: 50%;
+
+    background-color: rgba(248, 239, 217, 0.92);
+
+    color: #9f452c;
+
     font-size: 20px;
-    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.close-button:hover {
+    background-color: #9f452c;
+
+    color: #f8efd9;
+
+    transform: scale(1.05);
 }
 
 .explore-button {
     width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
+
+    padding: 11px 14px;
+
+    border: 1px solid #9f452c;
+    border-radius: 4px;
+
+    background-color: #9f452c;
+
+    color: #f8efd9;
+
+    font-size: 12px;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.explore-button:hover {
+    background-color: #6e3424;
+
+    transform: translateY(-1px);
+}
+
+
+/* ========================================
+   GENERAL BUTTONS
+   ======================================== */
+
+button {
+    font-family: inherit;
+}
+
+
+/* ========================================
+   SCROLLBAR
+   ======================================== */
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #f4ead2;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #b99b6b;
+
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #9f452c;
+}
+
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 900px) {
+
+    .sidebar {
+        width: 220px;
+    }
+
+    .sidebar.collapsed {
+        width: 70px;
+    }
+
+    .location-card {
+        width: 320px;
+
+        right: 15px;
+        bottom: 15px;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .sidebar {
+        width: 76px;
+
+        padding: 20px 12px;
+    }
+
+    .sidebar-logo {
+        display: none;
+    }
+
+    .sidebar-header {
+        justify-content: center;
+    }
+
+    .sidebar-link {
+        width: 44px;
+
+        justify-content: center;
+
+        padding: 0;
+    }
+
+    .sidebar-link span {
+        display: none;
+    }
+
+    .sidebar-footer {
+        display: none;
+    }
+
+    .page {
+        padding: 20px;
+    }
+
+    .location-card {
+        left: 15px;
+        right: 15px;
+
+        bottom: 15px;
+
+        width: auto;
+    }
 }
