@@ -112,3 +112,28 @@
 
     z-index: 2000;
 }
+.map-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.district-map {
+    width: 100%;
+    height: 100%;
+}
+
+.visit-logger-overlay {
+    position: absolute;
+    right: 25px;
+    bottom: 25px;
+
+    width: 420px;
+    max-width: calc(100% - 40px);
+
+    max-height: calc(100% - 40px);
+
+    overflow-y: auto;
+
+    z-index: 2000;
+}

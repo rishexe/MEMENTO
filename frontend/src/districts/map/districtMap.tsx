@@ -3,7 +3,8 @@ import {
     MapContainer,
     TileLayer,
     GeoJSON,
-    Marker
+    Marker,
+    Polygon
 } from "react-leaflet";
 
 import locations from "./locationMarks";
@@ -20,18 +21,43 @@ function DistrictMap() {
             .then((res) => res.json())
             .then((data) => {
                 setGangtok(data);
+            })
+            .catch((err) => {
+                console.error("Could not load Gangtok GeoJSON:", err);
             });
     }, []);
 
-    function selectLocation(location: any) {
+    function handleMarkerClick(location: any) {
         setSelectedLocation(location);
         setShowVisitLogger(false);
     }
 
-    function closeLocation() {
+    function handleClose() {
         setSelectedLocation(null);
         setShowVisitLogger(false);
     }
+
+    /*
+     * Convert GeoJSON [lng, lat]
+     * into Leaflet [lat, lng]
+     */
+    const gangtokCoordinates =
+        gangtok?.features?.[0]?.geometry?.coordinates?.[0]?.map(
+            ([lng, lat]: [number, number]) => [lat, lng] as [number, number]
+        );
+
+    /*
+     * Huge rectangle around the whole world.
+     * Gangtok will be cut out of it using
+     * the second ring.
+     */
+    const outsideMap = [
+        [-90, -180],
+        [-90, 180],
+        [90, 180],
+        [90, -180],
+        [-90, -180]
+    ] as [number, number][];
 
     return (
         <div className="map-container">
@@ -43,29 +69,60 @@ function DistrictMap() {
                 className="district-map"
             >
 
+                {/* Base map */}
+
                 <TileLayer
-                    attribution="&copy; OpenStreetMap contributors"
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    attribution='&copy; OpenStreetMap contributors &copy; CARTO'
+                    url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
                 />
+
+
+                {/* Fade everything outside Gangtok */}
+
+                {gangtokCoordinates && (
+                    <Polygon
+                        positions={[
+                            outsideMap,
+                            gangtokCoordinates
+                        ]}
+                        pathOptions={{
+                            stroke: false,
+                            fillColor: "#f4ead2",
+                            fillOpacity: 0.78,
+                            fillRule: "evenodd"
+                        }}
+                    />
+                )}
+
+
+                {/* Actual Gangtok boundary */}
 
                 {gangtok && (
                     <GeoJSON
                         data={gangtok}
                         style={{
                             color: "#9f452c",
-                            weight: 2,
+                            weight: 3,
+                            opacity: 1,
                             fillColor: "#f4ead2",
-                            fillOpacity: 0.25
+                            fillOpacity: 0.05
                         }}
                     />
                 )}
 
+
+                {/* Location pins */}
+
                 {locations.map((location) => (
                     <Marker
                         key={location.id}
-                        position={[location.lat, location.lng]}
+                        position={[
+                            location.lat,
+                            location.lng
+                        ]}
                         eventHandlers={{
-                            click: () => selectLocation(location)
+                            click: () =>
+                                handleMarkerClick(location)
                         }}
                     />
                 ))}
@@ -73,25 +130,42 @@ function DistrictMap() {
             </MapContainer>
 
 
+            {/* Location Card */}
+
             {selectedLocation && !showVisitLogger && (
                 <LocationCard
                     location={selectedLocation}
-                    onClose={closeLocation}
-                    onExplore={() => setShowVisitLogger(true)}
+                    onClose={handleClose}
+                    onExplore={() =>
+                        setShowVisitLogger(true)
+                    }
                 />
             )}
 
+
+            {/* Visit Logger */}
 
             {selectedLocation && showVisitLogger && (
                 <div className="visit-logger-overlay">
 
                     <VisitLogger
-                        locationName={selectedLocation.name}
-                        locationMeta={`Gangtok • ${selectedLocation.category}`}
-                        locationImage={selectedLocation.image}
-                        onCancel={() => setShowVisitLogger(false)}
+                        locationName={
+                            selectedLocation.name
+                        }
+                        locationMeta={
+                            `Gangtok • ${selectedLocation.category}`
+                        }
+                        locationImage={
+                            selectedLocation.image
+                        }
+                        onCancel={() =>
+                            setShowVisitLogger(false)
+                        }
                         onSubmit={(payload) => {
-                            console.log("Visit logged:", payload);
+                            console.log(
+                                "Visit logged:",
+                                payload
+                            );
                         }}
                     />
 
