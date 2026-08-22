@@ -1,16 +1,40 @@
 import "./locationCard.css";
-function locationCard({location,onClose }: any) {
+
+interface LocationCardProps {
+    location: any;
+    onClose: () => void;
+    onExplore: () => void;
+}
+
+function LocationCard({
+    location,
+    onClose,
+    onExplore
+}: LocationCardProps) {
     return (
         <div className="location-card">
-            <button className="close-button" onClick={onClose}>
+
+            <button
+                type="button"
+                className="close-button"
+                onClick={onClose}
+            >
                 ×
             </button>
 
             <div className="location-image">
-                <img src={location.image} alt={location.name} />
+                {location.image ? (
+                    <img
+                        src={location.image}
+                        alt={location.name}
+                    />
+                ) : (
+                    <span>{location.category}</span>
+                )}
             </div>
 
             <div className="location-content">
+
                 <p className="location-category">
                     {location.category}
                 </p>
@@ -19,12 +43,18 @@ function locationCard({location,onClose }: any) {
 
                 <p>{location.description}</p>
 
-                <button className="explore-button">
+                <button
+                    type="button"
+                    className="explore-button"
+                    onClick={onExplore}
+                >
                     Explore Location
                 </button>
+
             </div>
+
         </div>
     );
 }
 
-export default locationCard;
+export default LocationCard;

@@ -1,3 +1,4 @@
+import Quests from "./pages/quests/Quests";
 import { Routes, Route } from "react-router-dom";
 
 import Sidebar from "./sidebar";
@@ -13,13 +14,7 @@ function Districts() {
   );
 }
 
-function Quests() {
-  return (
-    <div className="page">
-      <h1>Quests</h1>
-    </div>
-  );
-}
+
 
 function App() {
   return (
