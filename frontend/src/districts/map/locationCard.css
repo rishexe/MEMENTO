@@ -1,6 +1,7 @@
 .location-card {
   position: relative;
-  width: 320px;
+  width: 380px;
+  height:auto;
   background: #f5f5dc;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
@@ -8,9 +9,9 @@
   font-family: "Segoe UI", Arial, sans-serif;
   transition: transform 0.2s ease-in-out;
   float: right;
-  margin-top: -300px; 
+  margin-top: -380px; 
   margin-right:-20px;
-  margin-bottom: 20px;
+  margin-bottom: 50px;
   margin-left: 20px;
 }
 
@@ -37,7 +38,7 @@
   position: relative;
   background: #e6d8ad;
   width: 100%;
-  height: 140px;
+  height: 200px;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -57,7 +58,7 @@
 }
 
 .location-content {
-  padding: 16px;
+  padding: 20px;
 }
 
 .location-category {
@@ -68,7 +69,7 @@
 
 .location-content h2 {
   margin: 0;
-  font-size: 20px;
+  font-size: 22px;
   color: #3e2a1f;
 }
 
@@ -80,7 +81,7 @@
 
 .explore-button {
   display: inline-block;
-  padding: 10px 16px;
+  padding: 12px 18px;
   background: #d2b48c;
   color: #fff;
   border: none;
