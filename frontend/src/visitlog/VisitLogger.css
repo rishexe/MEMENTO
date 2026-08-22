@@ -1,0 +1,265 @@
+.visit-logger {
+  min-height: 500px;
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  background: #f5efdd;
+  padding: 20px;
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+.visit-logger__card {
+  border: 1px solid #c9b896;
+  border-radius: 8px;
+  background: #f9f5e8;
+  overflow: hidden;
+}
+
+.visit-logger__thumb {
+  height: 144px;
+  width: 100%;
+  background: #e4d9bc;
+  overflow: hidden;
+}
+
+.visit-logger__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.visit-logger__thumb-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #b5a67d;
+}
+
+.visit-logger__body {
+  padding: 20px;
+}
+
+.visit-logger__eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: #8a7f63;
+  font-weight: 600;
+  margin: 0 0 4px;
+}
+
+.visit-logger__title {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #2b2318;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.visit-logger__meta {
+  font-size: 12px;
+  color: #8a7f63;
+  margin: 4px 0 20px;
+}
+
+.visit-logger__field {
+  margin-bottom: 20px;
+}
+
+.visit-logger__field label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b6152;
+  margin-bottom: 6px;
+  letter-spacing: 0.02em;
+}
+
+.visit-logger__field input[type="date"],
+.visit-logger__field textarea {
+  width: 100%;
+  background: transparent;
+  border: 1px solid #c9b896;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-size: 14px;
+  color: #2b2318;
+  outline: none;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.visit-logger__field input[type="date"]:focus,
+.visit-logger__field textarea:focus {
+  border-color: #a94a3c;
+}
+
+.visit-logger__field textarea {
+  resize: none;
+}
+
+.visit-logger__hint {
+  font-size: 11px;
+  color: #8a7f63;
+  margin: 4px 0 0;
+}
+
+.visit-logger__char-count {
+  text-align: right;
+  font-size: 11px;
+  color: #b5a67d;
+  margin: 4px 0 0;
+}
+
+.visit-logger__photo-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #a94a3c;
+  font-weight: 500;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.visit-logger__photo-btn:hover:not(:disabled) {
+  color: #8a3a2f;
+}
+
+.visit-logger__photo-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.visit-logger__file-input {
+  display: none;
+}
+
+.visit-logger__photo-grid {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.visit-logger__photo-thumb {
+  position: relative;
+  width: 56px;
+  height: 56px;
+}
+
+.visit-logger__photo-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid #c9b896;
+}
+
+.visit-logger__photo-thumb button {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: #f9f5e8;
+  border: 1px solid #c9b896;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  color: #6b6152;
+}
+
+.visit-logger__error {
+  color: #a94a3c;
+  font-size: 12px;
+  margin-bottom: 16px;
+}
+
+.visit-logger__actions {
+  display: flex;
+  gap: 12px;
+}
+
+.visit-logger__btn {
+  flex: 1;
+  border-radius: 4px;
+  padding: 10px 0;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+}
+
+.visit-logger__btn--secondary {
+  border: 1px solid #c9b896;
+  color: #6b6152;
+  background: none;
+}
+
+.visit-logger__btn--secondary:hover {
+  border-color: #8a7f63;
+}
+
+.visit-logger__btn--primary {
+  background: #a94a3c;
+  color: #f9f5e8;
+  font-weight: 600;
+}
+
+.visit-logger__btn--primary:hover {
+  background: #8a3a2f;
+}
+
+.visit-logger--success {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.visit-logger__success-content {
+  text-align: center;
+}
+
+.visit-logger__success-icon {
+  margin: 0 auto 12px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 2px solid #a94a3c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #a94a3c;
+}
+
+.visit-logger__success-title {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: #2b2318;
+  margin: 0;
+}
+
+.visit-logger__success-location {
+  color: #6b6152;
+  font-size: 14px;
+  margin: 4px 0 12px;
+}
+
+.visit-logger__link-btn {
+  font-size: 12px;
+  color: #a94a3c;
+  text-decoration: underline;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
