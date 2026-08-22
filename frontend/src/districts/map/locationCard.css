@@ -1,0 +1,78 @@
+.location-card {
+  position: relative;
+  width: 320px;
+  background: #f5f5dc;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  overflow: hidden;
+  font-family: "Segoe UI", Arial, sans-serif;
+  transition: transform 0.2s ease;
+}
+
+.location-card:hover {
+  transform: translateY(-4px);
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #6b4f3b;
+}
+
+.close-button:hover {
+  color: #3e2a1f;
+}
+
+.location-image {
+  background: #e6d8ad;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 18px;
+  color: #5c4033;
+}
+
+.location-content {
+  padding: 16px;
+}
+
+.location-category {
+  font-size: 14px;
+  color: #7a6a53;
+  margin-bottom: 6px;
+}
+
+.location-content h2 {
+  margin: 0;
+  font-size: 20px;
+  color: #3e2a1f;
+}
+
+.location-content p {
+  font-size: 14px;
+  color: #4a3c2a;
+  margin: 10px 0;
+}
+
+.explore-button {
+  display: inline-block;
+  padding: 10px 16px;
+  background: #d2b48c;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s ease;
+}
+
+.explore-button:hover {
+  background: #b38b6d;
+}
