@@ -1,19 +1,23 @@
 .location-card {
-  position: relative;
-  width: 320px;
-  background: #f5f5dc;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  overflow: hidden;
-  font-family: "Segoe UI", Arial, sans-serif;
-  transition: transform 0.2s ease-in-out;
-  float: right;
-  margin-top: -300px; 
-  margin-right:-20px;
-  margin-bottom: 20px;
-  margin-left: 20px;
-}
+    position: absolute;
 
+    right: 25px;
+    bottom: 25px;
+
+    width: 320px;
+
+    background: #f5f5dc;
+
+    border-radius: 12px;
+
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+
+    overflow: hidden;
+
+    font-family: "Segoe UI", Arial, sans-serif;
+
+    z-index: 1500;
+}
 .location-card:hover {
   transform: translateY(-4px);
 }
@@ -92,4 +96,19 @@
 
 .explore-button:hover {
   background: #b38b6d;
+}
+.visit-logger-overlay {
+    position: absolute;
+
+    right: 25px;
+    bottom: 25px;
+
+    width: 420px;
+    max-width: calc(100% - 40px);
+
+    max-height: calc(100% - 40px);
+
+    overflow-y: auto;
+
+    z-index: 2000;
 }
