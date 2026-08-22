@@ -1,6 +1,7 @@
 import { mockprofile } from "./mockprofile";
 import "./profile.css";
-
+import { useState } from "react";
+import { useVisits } from "../VisitContext";
 
 import {
     Landmark,
@@ -17,6 +18,17 @@ import {
 } from "lucide-react";
 
 function Profile() {
+
+    const { visits, xp, showXpReward } = useVisits();
+
+    const [favourites, setFavourites] = useState(
+        mockprofile.favourites
+    );
+
+   
+
+   
+
     return (
         <div className="profile-page">
 
@@ -32,6 +44,7 @@ function Profile() {
     />
 
 <div className="profile-info">
+
             <h1>{mockprofile.name}</h1>
 
             <p>{mockprofile.username}</p>
@@ -48,6 +61,7 @@ function Profile() {
 
                 </div>
 
+
                 <div className="profile-meta-item">
 
                     <CalendarDays size={15} />
@@ -59,6 +73,7 @@ function Profile() {
                 </div>
 
             </div>
+
 
             <div className="explorer-badge">
 
@@ -73,7 +88,7 @@ function Profile() {
 </div>
 
 
-                        <div className="profile-stats">
+            <div className="profile-stats">
 
                 <div className="stat">
 
@@ -123,10 +138,17 @@ function Profile() {
                     <Sparkles size={20} />
 
                     <h2>
-                        {mockprofile.statistics.xp}
+                        {xp}
                     </h2>
 
                     <p>XP Earned</p>
+                     {showXpReward && (
+
+        <div className="xp-reward">
+            +20 XP
+        </div>
+
+    )}
 
                 </div>
 
@@ -136,15 +158,25 @@ function Profile() {
             <div className="favourite-section">
 
                 <div className="section-heading">
+
                     <h2>
-                        <Bookmark size={17}/>
-                        FAVOURITES</h2>
-                    <span className="view-all">View all favourites</span>
+
+                        <Bookmark size={17} />
+
+                        FAVOURITES
+
+                    </h2>
+
+                    <span className="view-all">
+                        View all favourites
+                    </span>
+
                 </div>
+
 
                 <div className="favourite-grid">
 
-                    {mockprofile.favourites.map((place) => (
+                    {favourites.map((place) => (
 
                         <div
                             className="favourite-card"
@@ -158,14 +190,29 @@ function Profile() {
                                     alt={place.name}
                                 />
 
-                                <div className="favourite-bookmark">
+                                <div
+                                    className="favourite-bookmark"
+                                    onClick={() => {
 
-                                    <Bookmark size={18}
-                                    fill="#9f452c"/>
+                                        setFavourites((prev) =>
+                                            prev.filter(
+                                                (item) =>
+                                                    item.name !== place.name
+                                            )
+                                        );
+
+                                    }}
+                                >
+
+                                    <Bookmark
+                                        size={18}
+                                        fill="#9f452c"
+                                    />
 
                                 </div>
 
                             </div>
+
 
                             <div className="favourite-info">
 
@@ -189,19 +236,29 @@ function Profile() {
             <div className="visit-section">
 
                 <div className="section-heading">
+
                     <h2>
-                        <Camera size={17}/>
-                        VISIT LOG</h2>
-                    <span className="view-all">View all visits</span>
+
+                        <Camera size={17} />
+
+                        VISIT LOG
+
+                    </h2>
+
+                    <span className="view-all">
+                        View all visits
+                    </span>
+
                 </div>
+
 
                 <div className="visit-list">
 
-                    {mockprofile.visits.map((visit) => (
+                    {visits.map((visit) => (
 
                         <div
                             className="visit-card"
-                            key={visit.date + visit.name}
+                            key={visit.id}
                         >
 
                             <div className="visit-date">
@@ -245,11 +302,12 @@ function Profile() {
 
 
                             <div className="visit-photos">
-                               <Camera size={16}/>
-                               <span> 
-                                {visit.photos}
-                               </span>
-                                 
+
+                                <Camera size={16} />
+
+                                <span>
+                                    {visit.photos}
+                                </span>
 
                             </div>
 
@@ -274,7 +332,9 @@ function Profile() {
 
                     </h2>
 
-                    <span className="view-list">View all bucket list</span>
+                    <span className="view-list">
+                        View all bucket list
+                    </span>
 
                 </div>
 
@@ -317,10 +377,16 @@ function Profile() {
                 <div className="section-heading">
 
                     <h2>
-                        <Trophy size={17}/>
-                        ACHIEVEMENTS</h2>
 
-                    <span className="view-all">View all achievements</span>
+                        <Trophy size={17} />
+
+                        ACHIEVEMENTS
+
+                    </h2>
+
+                    <span className="view-all">
+                        View all achievements
+                    </span>
 
                 </div>
 
@@ -334,16 +400,33 @@ function Profile() {
                             key={achievement.name}
                         >
 
-                           <div className="achievement-icon">
+                            <div className="achievement-icon">
 
-    {achievement.type === "heritage" && <Landmark size={36} />}
-    {achievement.type === "mountain" && <Mountain size={36} />}
-    {achievement.type === "memory" && <Camera size={36} />}
-    {achievement.type === "district" && <MapPin size={36} />}
-    {achievement.type === "trail" && <Flag size={36} />}
-    {achievement.type === "early" && <Sunrise size={36} />}
+                                {achievement.type === "heritage" &&
+                                    <Landmark size={36} />
+                                }
 
-</div>
+                                {achievement.type === "mountain" &&
+                                    <Mountain size={36} />
+                                }
+
+                                {achievement.type === "memory" &&
+                                    <Camera size={36} />
+                                }
+
+                                {achievement.type === "district" &&
+                                    <MapPin size={36} />
+                                }
+
+                                {achievement.type === "trail" &&
+                                    <Flag size={36} />
+                                }
+
+                                {achievement.type === "early" &&
+                                    <Sunrise size={36} />
+                                }
+
+                            </div>
 
 
                             <h3>{achievement.name}</h3>
@@ -359,7 +442,7 @@ function Profile() {
             </div>
 
 
-                        <div className="explorer-level-section">
+            <div className="explorer-level-section">
 
                 <div className="section-heading">
 

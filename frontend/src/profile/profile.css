@@ -863,3 +863,33 @@
         order: -1;
     }
 }
+.favourite-bookmark {
+    cursor: pointer;
+
+    transition:
+        transform 0.15s ease,
+        background-color 0.2s ease;
+}
+
+.favourite-bookmark:hover {
+    transform: scale(1.08);
+    background-color: #f8efd9;
+}
+
+.favourite-bookmark:active {
+    transform: scale(0.85);
+}
+.favourite-card {
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.favourite-card:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 7px 16px rgba(75, 49, 35, 0.14);
+}
