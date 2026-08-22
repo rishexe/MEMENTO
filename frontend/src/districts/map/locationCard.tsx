@@ -1,3 +1,4 @@
+import "./locationCard.css";
 function locationCard({location,onClose }: any) {
     return (
         <div className="location-card">
@@ -6,7 +7,7 @@ function locationCard({location,onClose }: any) {
             </button>
 
             <div className="location-image">
-                <span>{location.category}</span>
+                <img src={location.image} alt={location.name} />
             </div>
 
             <div className="location-content">
