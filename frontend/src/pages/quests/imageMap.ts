@@ -1,0 +1,50 @@
+const images: Record<string, string> = {
+  "Gangtok": "https://wanderon-images.gumlet.io/blogs/new/2023/12/gangtok.jpg",
+  "Rumtek": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Rumtek%20Monastery.jpg",
+  "Tsomgo Lake": "https://media1.thrillophilia.com/filestore/g62lr6gprrgjuc9bdy27mw9yf5j7_Tsongmo_Lake_or_Changu_Lake_-_East_Sikkim.jpg?dpr=2&w=1440",
+  "Nathula Pass": "https://www.naturetravelagency.com/uploads/1719214728Nathu%20la%20Gangtok.jpg",
+  "Enchey": "https://cdn.yatrigo.com/caa2nnqor6c.webp",
+  "Tashi View Point": "https://cdn1.tripoto.com/media/filter/nl/img/100758/TripDocument/1521198828_img_9179_1.jpg.webp",
+  "Bakthang Falls": "https://www.trawell.in/admin/images/upload/322883636Gangtok_Bakthang_Waterfalls_Main.jpg",
+  "Mangan": "https://www.myindianproducts.com/images/travel/cities/mangan-sikkim.webp",
+  "Phodong": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Phodong%20monastery%20-%20north%20sikkim.jpg",
+  "Singhik": "https://s7ap1.scene7.com/is/image/incredibleindia/singhik-viewpoint-mangan-sikkim-1-attr-hero?qlt=82&ts=1726655852291",
+  "Dzongu": "https://www.clubmahindra.com/blog/images/Dzongu-resized.jpg",
+  "Lachen": "https://blog.tourismsikkim.in/wp-content/uploads/2021/10/Lachen-Village-Surrounded-by-Green-Mountains.jpeg",
+  "Lachung": "https://nomadicweekends.com/blog/wp-content/uploads/2019/03/Lachung-City-In-between-the-Mountain-Ranges.jpg",
+  "Yumthang": "https://media1.thrillophilia.com/filestore/g62lr6gprrgjuc9bdy27mw9yf5j7_Tsongmo_Lake_or_Changu_Lake_-_East_Sikkim.jpg?dpr=2&w=1440&crop=yumthang",
+  "Namchi": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Namchi%20monastery%20Decchen%20Choyling%20Gumpa%20Sikkim%20India.jpg",
+  "Ravangla": "https://media2.thrillophilia.com/images/photos/000/402/072/original/1767699362_Ravangla.jpg?dpr=1.5&h=450&w=753",
+  "Temi": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Temi%20tea%20garden.jpg",
+  "Tendong": "https://travellingslacker.com/wp-content/uploads/2019/01/DSC_0769.jpg",
+  "Maenam": "https://static2.tripoto.com/media/filter/tst/img/393233/TripDocument/1494871400_for_tripoto_13.jpg.webp",
+  "Ralang": "https://www.sumiyashshreehotels.com/Uploads/Locations/img_6b9f775a-1207-4ced-bc78-d9da33f5f987.webp",
+  "Jorethang": "https://www.sikkimdekho.com/images/destination/59879rinchenpong-thumb.jpg",
+  "Pelling": "https://cdn.musafirbaba.com/media/1776754910447-Pelling.webp",
+  "Yuksom": "https://www.easeindiatrip.com/images/sikkim-img/yuksom-attr.jpg",
+  "Khecheopalri Lake": "https://www.setmytrip.in/wp-content/uploads/2024/09/Khecheopalri-Lake-Pelling-Sightseeing.jpg",
+  "Tashiding": "https://media.tripinvites.com/places/west-sikkim/pemayangtse-monastery/pemayangtse-monastery-featured-400x400.jpg",
+  "Pemayangtse": "https://media.tripinvites.com/places/west-sikkim/pemayangtse-monastery/garden-at-pemayangtse-monastery.jpg",
+  "Rabdentse": "https://www.spectator.com.au/wp-content/uploads/2015/08/horizon1.jpg?crop=1&h=413&w=620",
+  "Sanga Choeling": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Sanga%20Choeling%20Monastery%2C%20Pelling%2C%20West%20Sikkim%2001.jpg",
+  "Pakyong": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Pakyong%20Airport%2C%20Gangtok.png",
+  "Rongli": "https://files.yappe.in/place/full/rongli-bazar-7555947.webp",
+  "Rhenock": "https://sikkimproject.org/wp-content/uploads/2022/07/DSC_3368-1.jpg",
+  "Aritar": "https://4.bp.blogspot.com/-Z64C9gWb-Vg/W5D29kwNvYI/AAAAAAAABs4/Qtl7fq6M_h0dRlIptfD4IHmKNH_dg6uUQCLcBGAs/s1600/aritarlake0303030030303.jpg",
+  "Zuluk": "https://assets.telegraphindia.com/telegraph/2022/Apr/1649767043_zuluk-1.jpg",
+  "Rorathang": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Photo_of_a_hanging_bridge_on_a_river_in_West_Sikkim,_taken_from_hilltop.jpg",
+  "Lungthung": "https://www.indiamike.com/files/images/30/48/61/lungthung-view-point.jpg",
+  "Soreng": "https://files.yappe.in/place/full/soreng-bazar-7555456.webp",
+  "Rinchenpong": "https://cdn.audleytravel.com/1596/1140/79/249863-mountain-views-rinchenpong-india.jpg",
+  "Kaluk": "https://www.springvaleresorts.in/images/destination/kaluk/kaluk01.jpg",
+  "Sombaria": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Anden%20Wolung%20Gumpa%2C%20Sombaria%2C%20West%20Sikkim.jpg",
+  "Sri Badam": "https://static2.tripoto.com/media/filter/tst/img/172710/TripDocument/1558693113_stupa_at_sribadam_an_offbeat_weekend_destinations_from_kolkata.jpg",
+  "Sangadorjee": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Rinchen_Chholing_Gumpa,_Meghi_Dara,_Rinchenpong,_West_Sikkim.jpg",
+  "Rammam": "https://files.yappe.in/place/full/ramam-bridge-bengal-sikkim-border-8036187.webp"
+};
+
+export function imageFor(location: string): string {
+  const image = images[location];
+  if (!image) throw new Error(`No destination image configured for ${location}`);
+  return image;
+}
