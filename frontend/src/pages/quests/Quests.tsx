@@ -169,13 +169,6 @@ export default function App() {
         </section>
       </main>
 
-      <nav className="bottom-nav">
-        <button><span>⌂</span><small>Home</small></button>
-        <button><span>⌖</span><small>Map</small></button>
-        <button className="active"><span>◇</span><small>Quests</small></button>
-        <button><span>○</span><small>Profile</small></button>
-      </nav>
-
       {selectedTrail && (
         <div className="quest-overlay" onClick={() => setSelectedTrail(null)}>
           <div className="quest-stage" onClick={(event) => event.stopPropagation()}>

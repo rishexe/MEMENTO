@@ -6,16 +6,6 @@ import Profile from "./profile/profile";
 import DistrictMap from "./districts/map/districtMap";
 import Home from "./pages/Home";
 
-function Districts() {
-  return (
-    <div className="page">
-      <h1>Districts</h1>
-    </div>
-  );
-}
-
-
-
 function App() {
   return (
     <div className="app">
@@ -24,9 +14,9 @@ function App() {
 
       <main className="main-content">
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home initialSection="hero" />} />
 
-          <Route path="/districts" element={<Districts />} />
+          <Route path="/districts" element={<Home initialSection="districts" />} />
 
           <Route path="/map" element={<DistrictMap />} />
 
