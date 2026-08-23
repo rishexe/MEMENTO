@@ -19,8 +19,7 @@ type ParticleStyle = CSSProperties & {
   "--delay": string;
 };
 
-const heroImage =
-  "https://images.unsplash.com/photo-1684690198946-f44c09c5e29d?w=1800&h=1100&fit=crop&auto=format";
+const heroImage = "/images/hero.jpg";
 
 const districts: District[] = [
   {
