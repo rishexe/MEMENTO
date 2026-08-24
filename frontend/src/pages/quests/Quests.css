@@ -1,5 +1,21 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@500;600&family=IM+Fell+English:ital@0;1&display=swap");
+.hero-image {
+  position: absolute;
+  inset: 0;
 
+  background-image:
+    linear-gradient(
+      180deg,
+      rgba(16, 35, 34, 0.05) 0%,
+      rgba(16, 35, 34, 0.15) 45%,
+      rgba(16, 35, 34, 0.75) 100%
+    ),
+    url("/images/quest.jpeg");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 :root {
   --cream: #f4ead3;
   --paper: #f8efd9;

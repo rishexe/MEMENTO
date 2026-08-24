@@ -1,7 +1,7 @@
 import "./Quests.css";
 import { useEffect, useMemo, useState } from "react";
 import { districts, regionProgress, trails, type Trail } from "./data";
-
+import { useNavigate } from "react-router-dom";
 const STORAGE_KEY = "memento-sikkim-quest-progress-v1";
 
 function loadProgress(): Set<string> {
@@ -13,6 +13,7 @@ function loadProgress(): Set<string> {
 }
 
 export default function App() {
+  const navigate = useNavigate();
   const [district, setDistrict] = useState("All Sikkim");
   const [selectedTrail, setSelectedTrail] = useState<Trail | null>(null);
   const [completed, setCompleted] = useState<Set<string>>(loadProgress);
@@ -57,42 +58,33 @@ export default function App() {
   return (
     <div className="site">
       <section className="hero">
-        <div className="sun" />
-        <div className="mountains mountains-back" />
-        <div className="mountains mountains-mid" />
-        <div className="mountains mountains-front" />
-        <div className="mountains mountains-dark" />
+        <div className="hero-image" />
 
         <header className="topbar">
-          <button className="round-button" aria-label="Back">←</button>
+          <button
+  className="round-button"
+  aria-label="Back"
+  onClick={() => navigate("/")}
+>
+  ←
+</button>
           <div className="brand">
             <strong>SIKKIM</strong>
             <span>UNCHARTED</span>
           </div>
-          <button className="avatar" aria-label="Profile">M</button>
+          <button
+  className="avatar"
+  aria-label="Profile"
+  onClick={() => navigate("/profile")}
+>
+  M
+</button>
         </header>
 
         <div className="hero-copy">
           <div className="eyebrow"><i /> SIKKIM / REGION-WIDE JOURNEY</div>
           <h1>Sikkim<br /><em>quests.</em></h1>
           <p>Choose a place, follow its trail, and collect the memories hidden across Sikkim.</p>
-        </div>
-
-        <div className="stupa" aria-hidden="true">
-          <span className="stupa-pole" />
-          <span className="stupa-ball" />
-          <span className="stupa-roof roof-a" />
-          <span className="stupa-roof roof-b" />
-          <span className="stupa-body" />
-        </div>
-
-        <div className="progress-card">
-          <div className="progress-heading">
-            <span>Region progress</span>
-            <strong>{String(regionProgress.completed).padStart(2, "0")} <small>/ {regionProgress.total}</small></strong>
-          </div>
-          <div className="progress-track"><span style={{ width: `${(regionProgress.completed / regionProgress.total) * 100}%` }} /></div>
-          <p>Every district has a memory waiting for you.</p>
         </div>
       </section>
 
