@@ -23,10 +23,7 @@ button { font: inherit; cursor: pointer; }
   position: relative;
   min-height: 635px;
   overflow: hidden;
- background-image: url("/sikkim-quests-hero.png");
-background-size: cover;
-background-position: center;
-background-repeat: no-repeat;
+  background: linear-gradient(180deg, #a8c7cc 0%, #91b5bd 48%, #152a30 100%);
 }
 .sun { position: absolute; width: 112px; height: 112px; border-radius: 50%; top: 52px; right: 17%; background: #f1dda2; }
 .mountains { position: absolute; left: -5%; width: 110%; }
@@ -37,11 +34,7 @@ background-repeat: no-repeat;
 
 .topbar { position: absolute; z-index: 10; top: 0; left: 0; right: 0; height: 105px; padding: 27px 55px; display: flex; align-items: center; justify-content: space-between; }
 .round-button,.avatar { width:45px;height:45px;border:0;border-radius:50%;display:grid;place-items:center; }
-.round-button {
-  background:rgba(245,239,215,.8);
-  color:#263330;
-  font-size:25px;
-}
+.round-button { background:rgba(245,239,215,.8);color:#263330;font-size:25px; }
 .avatar { background:#c88447;color:#1d2522;font-weight:600; }
 .brand { position:absolute;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center; }
 .brand strong { font-family:"Playfair Display",serif;font-size:17px;letter-spacing:6px; }
@@ -62,9 +55,7 @@ background-repeat: no-repeat;
 .roof-b { top:125px;width:180px;height:65px; }
 .stupa-body { position:absolute;left:50%;top:135px;width:100px;height:190px;transform:translateX(-50%);background:linear-gradient(90deg,#3d5246 0 30%,#a86553 30% 100%); }
 
-.progress-card {
-  display: none;
-}
+.progress-card { position:absolute;z-index:10;right:8%;bottom:80px;width:270px;padding:24px 22px;background:#f6eedb;box-shadow:0 18px 50px rgba(0,0,0,.18); }
 .progress-heading { display:flex;align-items:center;justify-content:space-between; }
 .progress-heading span { font-size:13px;letter-spacing:1px; }
 .progress-heading strong { font-family:"Playfair Display",serif;font-size:31px;font-weight:500; }
@@ -262,12 +253,4 @@ background-repeat: no-repeat;
 
 @media (prefers-reduced-motion:reduce) {
   *,*::before,*::after { animation-duration:.01ms!important;transition-duration:.01ms!important; }
-}
-.mountains,
-.mountains-back,
-.mountains-mid,
-.mountains-front,
-.mountains-dark,
-.sun {
-  display: none;
 }
