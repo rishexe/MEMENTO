@@ -64,7 +64,13 @@ export default function App() {
         <div className="mountains mountains-dark" />
 
         <header className="topbar">
-          <button className="round-button" aria-label="Back">←</button>
+          <button
+  className="round-button"
+  aria-label="Back"
+  onClick={() => window.history.back()}
+>
+  ←
+</button>
           <div className="brand">
             <strong>SIKKIM</strong>
             <span>UNCHARTED</span>
@@ -78,13 +84,6 @@ export default function App() {
           <p>Choose a place, follow its trail, and collect the memories hidden across Sikkim.</p>
         </div>
 
-        <div className="stupa" aria-hidden="true">
-          <span className="stupa-pole" />
-          <span className="stupa-ball" />
-          <span className="stupa-roof roof-a" />
-          <span className="stupa-roof roof-b" />
-          <span className="stupa-body" />
-        </div>
 
         <div className="progress-card">
           <div className="progress-heading">
