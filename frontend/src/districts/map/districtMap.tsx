@@ -1,15 +1,138 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
     MapContainer,
     TileLayer,
     GeoJSON,
     Marker,
-    Polygon
+    useMap
 } from "react-leaflet";
 
 import locations from "./locationMarks";
 import LocationCard from "./locationCard";
 import VisitLogger from "../../visitlog/VisitLogger";
+import pinIcon from "./mapPins";
+
+function OutsideBlur({ coordinates }: { coordinates: [number, number][] }) {
+    const map = useMap();
+    const blurRef = useRef<HTMLDivElement | null>(null);
+
+    useEffect(() => {
+        if (!coordinates.length) return;
+
+        const container = map.getContainer();
+
+        const blur = document.createElement("div");
+        blur.className = "gangtok-outside-blur";
+
+        const svg = document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "svg"
+        );
+
+        const mask = document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "mask"
+        );
+
+        const outside = document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "path"
+        );
+
+        const gangtokHole = document.createElementNS(
+            "http://www.w3.org/2000/svg",
+            "path"
+        );
+
+        svg.setAttribute("width", "100%");
+        svg.setAttribute("height", "100%");
+
+        mask.setAttribute("id", "gangtok-blur-mask");
+        mask.setAttribute("maskUnits", "userSpaceOnUse");
+
+        /*
+         * White = blur
+         * Black = don't blur
+         */
+
+        outside.setAttribute(
+            "d",
+            `
+            M 0 0
+            H 10000
+            V 10000
+            H 0
+            Z
+            `
+        );
+
+        outside.setAttribute("fill", "white");
+
+        const updateBlur = () => {
+            const points = coordinates.map(([lat, lng]) => {
+                const point = map.latLngToContainerPoint([
+                    lat,
+                    lng
+                ]);
+
+                return `${point.x},${point.y}`;
+            });
+
+            const gangtokPath = `
+                M ${points.join(" L ")}
+                Z
+            `;
+
+            /*
+             * Black polygon creates the hole.
+             */
+
+            gangtokHole.setAttribute(
+                "d",
+                gangtokPath
+            );
+
+            gangtokHole.setAttribute(
+                "fill",
+                "black"
+            );
+
+            mask.innerHTML = "";
+
+            mask.appendChild(outside);
+            mask.appendChild(gangtokHole);
+
+            svg.innerHTML = "";
+            svg.appendChild(mask);
+
+            blur.style.mask = `url(#gangtok-blur-mask)`;
+            blur.style.webkitMask =
+                `url(#gangtok-blur-mask)`;
+        };
+
+        blur.appendChild(svg);
+
+        container.appendChild(blur);
+
+        blurRef.current = blur;
+
+        updateBlur();
+
+        map.on("move", updateBlur);
+        map.on("zoom", updateBlur);
+        map.on("resize", updateBlur);
+
+        return () => {
+            map.off("move", updateBlur);
+            map.off("zoom", updateBlur);
+            map.off("resize", updateBlur);
+
+            blur.remove();
+        };
+    }, [map, coordinates]);
+
+    return null;
+}
 
 function DistrictMap() {
     const [gangtok, setGangtok] = useState<any>(null);
@@ -37,27 +160,11 @@ function DistrictMap() {
         setShowVisitLogger(false);
     }
 
-    /*
-     * Convert GeoJSON [lng, lat]
-     * into Leaflet [lat, lng]
-     */
-    const gangtokCoordinates =
+    const gangtokCoordinates: [number, number][] =
         gangtok?.features?.[0]?.geometry?.coordinates?.[0]?.map(
-            ([lng, lat]: [number, number]) => [lat, lng] as [number, number]
-        );
-
-    /*
-     * Huge rectangle around the whole world.
-     * Gangtok will be cut out of it using
-     * the second ring.
-     */
-    const outsideMap = [
-        [-90, -180],
-        [-90, 180],
-        [90, 180],
-        [90, -180],
-        [-90, -180]
-    ] as [number, number][];
+            ([lng, lat]: [number, number]) =>
+                [lat, lng] as [number, number]
+        ) || [];
 
     return (
         <div className="map-container">
@@ -76,26 +183,15 @@ function DistrictMap() {
                     url="https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png"
                 />
 
+                {/* Gradual blur outside Gangtok */}
 
-                {/* Fade everything outside Gangtok */}
-
-                {gangtokCoordinates && (
-                    <Polygon
-                        positions={[
-                            outsideMap,
-                            gangtokCoordinates
-                        ]}
-                        pathOptions={{
-                            stroke: false,
-                            fillColor: "#f4ead2",
-                            fillOpacity: 0.78,
-                            fillRule: "evenodd"
-                        }}
+                {gangtokCoordinates.length > 0 && (
+                    <OutsideBlur
+                        coordinates={gangtokCoordinates}
                     />
                 )}
 
-
-                {/* Actual Gangtok boundary */}
+                {/* Gangtok boundary */}
 
                 {gangtok && (
                     <GeoJSON
@@ -103,32 +199,31 @@ function DistrictMap() {
                         style={{
                             color: "#9f452c",
                             weight: 3,
-                            opacity: 1,
-                            fillColor: "#f4ead2",
-                            fillOpacity: 0.05
+                            opacity: 0.95,
+                            fillColor: "#e8c9a8",
+                            fillOpacity: 0.08
                         }}
                     />
                 )}
 
-
                 {/* Location pins */}
 
                 {locations.map((location) => (
-                    <Marker
-                        key={location.id}
-                        position={[
-                            location.lat,
-                            location.lng
-                        ]}
-                        eventHandlers={{
-                            click: () =>
-                                handleMarkerClick(location)
-                        }}
-                    />
-                ))}
+    <Marker
+        key={location.id}
+        position={[
+            location.lat,
+            location.lng
+        ]}
+        icon={pinIcon}
+        eventHandlers={{
+            click: () =>
+                handleMarkerClick(location)
+        }}
+    />
+))}
 
             </MapContainer>
-
 
             {/* Location Card */}
 
@@ -141,7 +236,6 @@ function DistrictMap() {
                     }
                 />
             )}
-
 
             {/* Visit Logger */}
 
